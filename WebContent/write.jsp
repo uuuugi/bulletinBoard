@@ -5,13 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script>
-	function goWrite(){
-		location.href="write.jsp";
-	}
-</script>
 </head>
 <body>
-<input type="button" value="작성하기" onclick="goWrite()">
+<form action="doWrite.jsp" method="post">
+<input type="text" name="name" placeholder="제목">
+<textarea name="text" cols="40" rows="8">
+</textarea>
+<input type="submit" value="작성">
+</form>
 </body>
 </html>
