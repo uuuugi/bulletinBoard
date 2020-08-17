@@ -3,7 +3,9 @@ package bulletinBoard;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class bulletinBoardDAO {
 	private Connection getConnection() throws SQLException {
@@ -61,4 +63,39 @@ public class bulletinBoardDAO {
 
 		return result;
 	}
+	
+	public ArrayList<String> getPostList() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<String> postList = new ArrayList<String>();
+		
+		try {
+			conn = getConnection();
+
+			String sql = "select name from board";
+		      pstmt= conn.prepareStatement(sql);
+		      
+		      rs = pstmt.executeQuery();
+		      
+				while(rs.next()){
+					postList.add(rs.getString("Name"));
+					}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return postList;
+	}
+	
 }

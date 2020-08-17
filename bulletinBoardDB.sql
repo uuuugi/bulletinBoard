@@ -31,7 +31,7 @@ insert into user
 values('id2', 'pw2');
 
 insert into board(id, name, text)
-values('id1','test2', 'text1');
+values('id1','test16', 'text2');
 
 insert into comment(id, text, num)
 values('id2', 'comment', 1);
@@ -45,6 +45,7 @@ select name from board where name='name'; -- 글 이름으로 글 검색
 select * from comment;
 select text from comment where id='id'; -- id값으로 댓글 검색
 select text from comment where num='1'; -- num 값으로 댓글 검색(board에 있는 작성글 a에 대한 댓글을 검색할 때 사용한다.)
+
 
 -- drop
 drop table user;
