@@ -100,5 +100,44 @@ public class bulletinBoardDAO {
 
 		return postList;
 	}
-	
+	public bulletinBoardVO getPost(int num) { // PostName과 PostNum을담은 객체 arrayList를 반환
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		bulletinBoardVO vo = new bulletinBoardVO();
+		
+		try {
+			conn = getConnection();
+
+			String sql = "select id, name, text, star, num from board where num=?";
+		      
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+		    rs = pstmt.executeQuery();
+		      
+				while(rs.next()){
+					vo.setId(rs.getString("id"));
+					vo.setName(rs.getString("name"));
+					vo.setText(rs.getString("text"));
+					vo.setNum(rs.getInt("num"));
+					vo.setStar(rs.getInt("star"));
+					}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return vo;
+	}
 }

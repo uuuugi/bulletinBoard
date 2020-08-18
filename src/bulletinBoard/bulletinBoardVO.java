@@ -4,6 +4,21 @@ public class bulletinBoardVO {
 	String id;
 	String name;
 	String text;
+	int num;
+	int star;
+	
+	public int getStar() {
+		return star;
+	}
+	public void setStar(int star) {
+		this.star = star;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getId() {
 		return id;
 	}
