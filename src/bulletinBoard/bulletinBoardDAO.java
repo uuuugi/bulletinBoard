@@ -29,7 +29,7 @@ public class bulletinBoardDAO {
 		return conn;
 	}
 	
-	public boolean insertPost(bulletinBoardVO vo) {
+	public boolean insertPost(bulletinBoardVO vo) { // 게시글 저장
 		boolean result = false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -64,22 +64,25 @@ public class bulletinBoardDAO {
 		return result;
 	}
 	
-	public ArrayList<String> getPostList() {
+	public ArrayList<forPostList> getPostList() { // PostName과 PostNum을담은 객체 arrayList를 반환
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<String> postList = new ArrayList<String>();
+		ArrayList<forPostList> postList = new ArrayList<forPostList>();
 		
 		try {
 			conn = getConnection();
 
-			String sql = "select name from board";
+			String sql = "select name, num from board";
 		      pstmt= conn.prepareStatement(sql);
 		      
 		      rs = pstmt.executeQuery();
 		      
 				while(rs.next()){
-					postList.add(rs.getString("Name"));
+					forPostList tmp = new forPostList();
+					tmp.setName(rs.getString("Name"));
+					tmp.setNum(Integer.parseInt(rs.getString("num")));
+					postList.add(tmp);
 					}
 			
 		} catch (SQLException e) {
